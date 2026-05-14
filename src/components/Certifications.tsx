@@ -10,6 +10,7 @@ const certifications = [
     name: 'AWS Certified Machine Learning Engineer Associate',
     authority: 'Amazon Web Services',
     logo: '/logos/aws.png',
+    credential: 'https://www.credly.com/users/akshith-sai-kondamadugu/badges',
     description: [
       'Expertise in building, training, and deploying ML models on AWS',
       'Proficiency in SageMaker, MLOps, and data engineering'
@@ -19,6 +20,7 @@ const certifications = [
     name: 'AWS Certified AI Practitioner',
     authority: 'Amazon Web Services',
     logo: '/logos/aws.png',
+    credential: 'https://www.credly.com/users/akshith-sai-kondamadugu/badges',
     description: [
       'Foundational knowledge of AI/ML concepts and AWS AI services',
       'Understanding of generative AI and responsible AI practices'
@@ -72,39 +74,75 @@ export const Certifications = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="glass-card p-6 hover:border-primary/30 transition-all duration-300 group cursor-pointer hover:translate-y-[-4px] hover:shadow-lg"
             >
-              <div className="flex items-start gap-4 mb-4">
-                <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center shrink-0 p-2 border border-border/20 group-hover:border-primary/30 transition-colors">
-                  <img
-                    src={cert.logo}
-                    alt={cert.authority}
-                    className="w-full h-full object-contain"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.parentElement!.innerHTML = `<span class="font-bold text-primary text-lg">${cert.authority.substring(0, 3).toUpperCase()}</span>`;
-                    }}
-                  />
+              {cert.credential ? (
+                <a
+                  href={cert.credential}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-card p-6 hover:border-primary/30 transition-all duration-300 group cursor-pointer hover:translate-y-[-4px] hover:shadow-lg block"
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center shrink-0 p-2 border border-border/20 group-hover:border-primary/30 transition-colors">
+                      <img
+                        src={cert.logo}
+                        alt={cert.authority}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.innerHTML = `<span class="font-bold text-primary text-lg">${cert.authority.substring(0, 3).toUpperCase()}</span>`;
+                        }}
+                      />
+                    </div>
+                    <ExternalLink size={16} className="text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {cert.name}
+                  </h3>
+                  <p className="text-sm text-primary font-semibold mb-3">
+                    {cert.authority}
+                  </p>
+                  <ul className="space-y-2 mb-4">
+                    {cert.description.map((point, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">▹</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </a>
+              ) : (
+                <div className="glass-card p-6 hover:border-primary/30 transition-all duration-300 group cursor-pointer hover:translate-y-[-4px] hover:shadow-lg">
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="w-16 h-16 rounded-xl bg-white flex items-center justify-center shrink-0 p-2 border border-border/20 group-hover:border-primary/30 transition-colors">
+                      <img
+                        src={cert.logo}
+                        alt={cert.authority}
+                        className="w-full h-full object-contain"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.parentElement!.innerHTML = `<span class="font-bold text-primary text-lg">${cert.authority.substring(0, 3).toUpperCase()}</span>`;
+                        }}
+                      />
+                    </div>
+                    <ExternalLink size={16} className="text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {cert.name}
+                  </h3>
+                  <p className="text-sm text-primary font-semibold mb-3">
+                    {cert.authority}
+                  </p>
+                  <ul className="space-y-2 mb-4">
+                    {cert.description.map((point, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                        <span className="text-primary mt-1">▹</span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ExternalLink size={16} className="text-primary opacity-0 group-hover:opacity-100 transition-opacity ml-auto" />
-              </div>
-
-              <h3 className="font-display font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                {cert.name}
-              </h3>
-
-              <p className="text-sm text-primary font-semibold mb-3">
-                {cert.authority}
-              </p>
-
-              <ul className="space-y-2 mb-4">
-                {cert.description.map((point, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                    <span className="text-primary mt-1">▹</span>
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
+              )}
             </motion.div>
           ))}
         </div>

@@ -19,7 +19,7 @@ const skillCategories = [
   },
   {
     title: 'Cloud Platforms',
-    skills: ['AWS (SageMaker, S3)', 'Google Cloud Platform', 'Microsoft Azure', 'MLOps'],
+    skills: ['AWS', 'Google Cloud Platform', 'Microsoft Azure', 'MLOps'],
   },
   {
     title: 'Web & API Development',
